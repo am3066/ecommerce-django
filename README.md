@@ -1,4 +1,4 @@
-# 🛍️ E-Commerce Django — Atelier 3
+# 🛍️ E-Commerce Django
 
 Projet e-commerce avec système d'authentification Django.
 
