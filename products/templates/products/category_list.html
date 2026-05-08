@@ -1,0 +1,76 @@
+{% extends 'layout.html' %}
+{% block title %}Catégories{% endblock %}
+
+{% block content %}
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Jost:wght@300;400;500&display=swap');
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.8rem; font-weight: 300; color: #1a1208;
+    text-align: center; letter-spacing: 0.08em;
+  }
+  .section-sub {
+    font-family: 'Jost', sans-serif; font-size: 0.72rem;
+    letter-spacing: 0.35em; text-transform: uppercase; color: #b8964e;
+    text-align: center; margin-bottom: 3rem; margin-top: 0.4rem;
+  }
+  .cat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.5rem; }
+  .cat-card {
+    border: 1px solid #e8e0d0;
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+    text-decoration: none;
+    background: #fff;
+    transition: all 0.3s;
+    display: block;
+  }
+  .cat-card:hover {
+    background: #1a1208; border-color: #1a1208;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(26,18,8,0.15);
+  }
+  .cat-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+  .cat-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem; color: #1a1208; font-weight: 400;
+    transition: color 0.3s;
+  }
+  .cat-card:hover .cat-name { color: #d4af6a; }
+  .cat-arrow {
+    font-family: 'Jost', sans-serif; font-size: 0.65rem;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: #b8964e; margin-top: 0.8rem; display: block;
+    transition: color 0.3s;
+  }
+  .cat-card:hover .cat-arrow { color: #d4af6a; }
+
+  .back-link {
+    font-family: 'Jost', sans-serif; font-size: 0.72rem;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: #b8964e; text-decoration: none;
+    border-bottom: 1px solid #d4af6a; padding-bottom: 2px;
+  }
+</style>
+
+<div class="py-4">
+  <p class="section-sub">Notre univers</p>
+  <h1 class="section-title">Catégories</h1>
+
+  <div class="cat-grid mt-4">
+    {% for category in categories %}
+    <a href="{% url 'category_detail' category.id %}" class="cat-card">
+      <div class="cat-icon">✦</div>
+      <div class="cat-name">{{ category.name }}</div>
+      <span class="cat-arrow">Découvrir →</span>
+    </a>
+    {% empty %}
+    <p style="font-family:'Jost',sans-serif; color:#999; grid-column:1/-1; text-align:center;">Aucune catégorie disponible.</p>
+    {% endfor %}
+  </div>
+
+  <div class="text-center mt-5">
+    <a href="{% url 'product_list' %}" class="back-link">← Voir tous les produits</a>
+  </div>
+</div>
+{% endblock %}

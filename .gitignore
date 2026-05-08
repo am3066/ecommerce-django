@@ -1,0 +1,30 @@
+# Environnement virtuel
+myenv/
+venv/
+env/
+
+# Base de données
+db.sqlite3
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Django
+*.log
+local_settings.py
+
+# Images uploadées
+images/
+media/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db

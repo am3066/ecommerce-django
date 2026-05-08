@@ -1,0 +1,86 @@
+{% extends 'layout.html' %}
+{% block title %}Mon profil{% endblock %}
+
+{% block content %}
+<style>
+    .page-label {
+        font-family: 'Jost', sans-serif; font-size: 0.68rem;
+        letter-spacing: 0.35em; text-transform: uppercase; color: #b8964e;
+        margin-bottom: 0.4rem;
+    }
+    .page-title {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 2.6rem; font-weight: 300; color: #1a1208;
+        margin-bottom: 0.5rem; letter-spacing: 0.05em;
+    }
+    .gold-divider { width: 48px; height: 1px; background: #d4af6a; margin: 1.5rem 0; }
+
+    .profile-card {
+        background: #fff;
+        border: 1px solid #e8e0d0;
+        max-width: 520px;
+        overflow: hidden;
+    }
+    .profile-row {
+        display: flex;
+        align-items: center;
+        padding: 1.1rem 1.5rem;
+        border-bottom: 1px solid #f0ebe2;
+    }
+    .profile-row:last-child { border-bottom: none; }
+    .profile-label {
+        font-family: 'Jost', sans-serif; font-size: 0.68rem;
+        letter-spacing: 0.2em; text-transform: uppercase; color: #b8964e;
+        width: 160px; flex-shrink: 0;
+    }
+    .profile-value {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.15rem; color: #1a1208;
+    }
+    .badge-yes {
+        font-family: 'Jost', sans-serif; font-size: 0.6rem;
+        letter-spacing: 0.15em; text-transform: uppercase;
+        background: #1a1208; color: #d4af6a;
+        padding: 3px 10px;
+    }
+    .badge-no {
+        font-family: 'Jost', sans-serif; font-size: 0.6rem;
+        letter-spacing: 0.15em; text-transform: uppercase;
+        background: #f0ebe2; color: #aaa;
+        padding: 3px 10px;
+    }
+    .btn-gold-sm {
+        font-family: 'Jost', sans-serif; font-size: 0.68rem;
+        letter-spacing: 0.22em; text-transform: uppercase;
+        background: #1a1208; color: #d4af6a;
+        border: none; padding: 11px 26px; text-decoration: none;
+        display: inline-block; transition: all 0.2s; margin-top: 2rem;
+    }
+    .btn-gold-sm:hover { background: #d4af6a; color: #1a1208; }
+</style>
+
+<p class="page-label">Espace personnel</p>
+<h1 class="page-title">Mon Profil</h1>
+<div class="gold-divider"></div>
+
+<div class="profile-card">
+    <div class="profile-row">
+        <span class="profile-label">Nom d'utilisateur</span>
+        <span class="profile-value">{{ user.username }}</span>
+    </div>
+    <div class="profile-row">
+        <span class="profile-label">Email</span>
+        <span class="profile-value">{{ user.email|default:"—" }}</span>
+    </div>
+    <div class="profile-row">
+        <span class="profile-label">Staff</span>
+        <span>{% if user.is_staff %}<span class="badge-yes">Oui</span>{% else %}<span class="badge-no">Non</span>{% endif %}</span>
+    </div>
+    <div class="profile-row">
+        <span class="profile-label">Superutilisateur</span>
+        <span>{% if user.is_superuser %}<span class="badge-yes">Oui</span>{% else %}<span class="badge-no">Non</span>{% endif %}</span>
+    </div>
+</div>
+
+<a href="{% url 'cart' %}" class="btn-gold-sm">🛒 Voir mon panier →</a>
+{% endblock %}

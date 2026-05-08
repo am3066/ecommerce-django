@@ -1,0 +1,74 @@
+{% extends 'layout.html' %}
+{% block title %}{{ category.name }}{% endblock %}
+
+{% block content %}
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Jost:wght@300;400;500&display=swap');
+
+  .cat-header {
+    border-bottom: 1px solid #d4af6a;
+    padding-bottom: 1.5rem; margin-bottom: 3rem;
+  }
+  .cat-tag {
+    font-family: 'Jost', sans-serif; font-size: 0.68rem;
+    letter-spacing: 0.35em; text-transform: uppercase; color: #b8964e;
+    margin-bottom: 0.5rem;
+  }
+  .cat-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.8rem; font-weight: 300; color: #1a1208; letter-spacing: 0.06em;
+  }
+  .product-list-luxury { list-style: none; padding: 0; margin: 0; }
+  .product-list-luxury li {
+    border-bottom: 1px solid #ede8df;
+    transition: background 0.2s;
+  }
+  .product-list-luxury li:hover { background: #faf7f2; }
+  .product-list-luxury a {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.2rem 0.5rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem; color: #1a1208; text-decoration: none;
+    letter-spacing: 0.03em;
+  }
+  .product-list-luxury a::after {
+    content: '→';
+    font-family: 'Jost', sans-serif;
+    font-size: 0.8rem; color: #b8964e;
+    transition: transform 0.2s;
+  }
+  .product-list-luxury li:hover a::after { transform: translateX(4px); }
+
+  .empty-msg {
+    font-family: 'Jost', sans-serif; color: #aaa;
+    font-size: 0.9rem; letter-spacing: 0.1em; padding: 2rem 0;
+  }
+  .back-link {
+    font-family: 'Jost', sans-serif; font-size: 0.72rem;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: #b8964e; text-decoration: none;
+    border-bottom: 1px solid #d4af6a; padding-bottom: 2px;
+  }
+</style>
+
+<div class="py-3">
+  <div class="cat-header">
+    <p class="cat-tag">Catégorie</p>
+    <h1 class="cat-title">{{ category.name }}</h1>
+  </div>
+
+  <ul class="product-list-luxury">
+    {% for product in products %}
+    <li>
+      <a href="{% url 'product_detail' product.pk %}">{{ product.name }}</a>
+    </li>
+    {% empty %}
+    <li class="empty-msg">Aucun produit dans cette catégorie.</li>
+    {% endfor %}
+  </ul>
+
+  <div class="mt-5">
+    <a href="{% url 'category_list' %}" class="back-link">← Retour aux catégories</a>
+  </div>
+</div>
+{% endblock %}

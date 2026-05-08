@@ -1,0 +1,120 @@
+{% extends 'layout.html' %}
+{% block title %}Mon Panier{% endblock %}
+
+{% block content %}
+<style>
+    .page-label {
+        font-family: 'Jost', sans-serif; font-size: 0.68rem;
+        letter-spacing: 0.35em; text-transform: uppercase; color: #b8964e;
+        margin-bottom: 0.4rem;
+    }
+    .page-title {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 2.6rem; font-weight: 300; color: #1a1208;
+        letter-spacing: 0.05em;
+    }
+    .gold-divider { width: 48px; height: 1px; background: #d4af6a; margin: 1.5rem 0 2rem; }
+
+    .cart-table { width: 100%; border-collapse: collapse; }
+    .cart-table thead tr {
+        border-bottom: 2px solid #d4af6a;
+    }
+    .cart-table th {
+        font-family: 'Jost', sans-serif; font-size: 0.65rem;
+        letter-spacing: 0.28em; text-transform: uppercase; color: #b8964e;
+        padding: 0 1rem 1rem 0; text-align: left; font-weight: 400;
+    }
+    .cart-table td {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.15rem; color: #1a1208;
+        padding: 1.2rem 1rem 1.2rem 0;
+        border-bottom: 1px solid #ede8df;
+    }
+    .cart-table tr:last-child td { border-bottom: none; }
+
+    .cart-total-row {
+        display: flex; justify-content: space-between; align-items: center;
+        border-top: 2px solid #d4af6a;
+        padding-top: 1.5rem; margin-top: 0.5rem;
+    }
+    .total-label {
+        font-family: 'Jost', sans-serif; font-size: 0.68rem;
+        letter-spacing: 0.3em; text-transform: uppercase; color: #b8964e;
+    }
+    .total-amount {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 2rem; font-weight: 600; color: #1a1208;
+    }
+
+    .btn-gold {
+        font-family: 'Jost', sans-serif; font-size: 0.68rem;
+        letter-spacing: 0.22em; text-transform: uppercase;
+        background: #1a1208; color: #d4af6a;
+        border: none; padding: 13px 28px; text-decoration: none;
+        display: inline-block; transition: all 0.25s; cursor: pointer;
+    }
+    .btn-gold:hover { background: #d4af6a; color: #1a1208; }
+
+    .btn-ghost {
+        font-family: 'Jost', sans-serif; font-size: 0.68rem;
+        letter-spacing: 0.22em; text-transform: uppercase;
+        background: transparent; color: #1a1208;
+        border: 1px solid #d4af6a; padding: 12px 24px; text-decoration: none;
+        display: inline-block; transition: all 0.25s;
+    }
+    .btn-ghost:hover { background: #f0ebe2; color: #1a1208; }
+
+    .empty-cart {
+        text-align: center; padding: 4rem 0;
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.4rem; color: #aaa; font-style: italic;
+    }
+</style>
+
+<p class="page-label">Espace personnel</p>
+<h1 class="page-title">Mon Panier</h1>
+<div class="gold-divider"></div>
+
+{% if cart_items %}
+<div style="max-width: 720px;">
+    <table class="cart-table">
+        <thead>
+            <tr>
+                <th>Produit</th>
+                <th>Prix unitaire</th>
+                <th>Quantité</th>
+                <th>Sous-total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in cart_items %}
+            <tr>
+                <td>{{ item.name }}</td>
+                <td>{{ item.price }} MAD</td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.price }} MAD</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="cart-total-row mt-3">
+        <span class="total-label">Total</span>
+        <span class="total-amount">{{ total }} MAD</span>
+    </div>
+
+    <div style="display:flex; gap:1rem; margin-top:2.5rem;">
+        <a href="{% url 'product_list' %}" class="btn-ghost">← Continuer mes achats</a>
+        <button class="btn-gold">Passer la commande →</button>
+    </div>
+</div>
+
+{% else %}
+<div class="empty-cart">
+    <div style="font-size:3rem; margin-bottom:1rem;">✦</div>
+    Votre panier est vide.<br>
+    <a href="{% url 'product_list' %}" style="font-family:'Jost',sans-serif; font-size:0.72rem; letter-spacing:0.22em; text-transform:uppercase; color:#b8964e; text-decoration:none; border-bottom:1px solid #d4af6a; margin-top:1.5rem; display:inline-block;">Découvrir nos produits →</a>
+</div>
+{% endif %}
+
+{% endblock %}
